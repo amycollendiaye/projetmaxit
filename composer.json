@@ -1,0 +1,32 @@
+{
+    "name": "projet/maxit",
+    "autoload": {
+        "psr-4": {
+            "Projet\\src\\": "src/",
+            "Src\\Entity\\": "src/entity",
+            "Src\\Repository\\":"src/repository",
+            "Src\\Controller\\":"src/controller",
+            "Src\\Service\\":"src/service",
+             "projet\\App\\":"app/",
+             "App\\config\\":"app/config/",
+            "App\\core\\":"app/core/",
+            "App\\core\\Abstract\\":"app/core/abstract"
+            
+
+
+
+
+
+
+
+
+        }
+    },
+    "authors": [
+        {
+            "name": "amycollendiaye",
+            "email": "amycollendiaye103@gmail.com"
+        }
+    ],
+    "require": {}
+}
