@@ -6,13 +6,18 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit26be9d71d941cac4b0efc0d00ca11b73
 {
+    public static $files = array (
+        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
-        'p' => 
-        array (
-            'projet\\App\\' => 11,
-        ),
         'S' => 
         array (
+            'Symfony\\Polyfill\\Php80\\' => 23,
+            'Symfony\\Polyfill\\Mbstring\\' => 26,
+            'Symfony\\Polyfill\\Ctype\\' => 23,
             'Src\\Service\\' => 12,
             'Src\\Repository\\' => 15,
             'Src\\Entity\\' => 11,
@@ -21,19 +26,37 @@ class ComposerStaticInit26be9d71d941cac4b0efc0d00ca11b73
         'P' => 
         array (
             'Projet\\src\\' => 11,
+            'PhpOption\\' => 10,
+        ),
+        'G' => 
+        array (
+            'GrahamCampbell\\ResultType\\' => 26,
+        ),
+        'D' => 
+        array (
+            'Dotenv\\' => 7,
         ),
         'A' => 
         array (
-            'App\\core\\Abstract\\' => 18,
-            'App\\core\\' => 9,
-            'App\\config\\' => 11,
+            'App\\Core\\Middleware\\' => 20,
+            'App\\Core\\Abstract\\' => 18,
+            'App\\Core\\' => 9,
+            'App\\Config\\' => 11,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'projet\\App\\' => 
+        'Symfony\\Polyfill\\Php80\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/app',
+            0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
+        ),
+        'Symfony\\Polyfill\\Mbstring\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+        ),
+        'Symfony\\Polyfill\\Ctype\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
         'Src\\Service\\' => 
         array (
@@ -55,22 +78,43 @@ class ComposerStaticInit26be9d71d941cac4b0efc0d00ca11b73
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
-        'App\\core\\Abstract\\' => 
+        'PhpOption\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
+        ),
+        'GrahamCampbell\\ResultType\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/graham-campbell/result-type/src',
+        ),
+        'Dotenv\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
+        ),
+        'App\\Core\\Middleware\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/app/core/middlewares',
+        ),
+        'App\\Core\\Abstract\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app/core/abstract',
         ),
-        'App\\core\\' => 
+        'App\\Core\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app/core',
         ),
-        'App\\config\\' => 
+        'App\\Config\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app/config',
         ),
     );
 
     public static $classMap = array (
+        'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'PhpToken' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/PhpToken.php',
+        'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
+        'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
+        'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

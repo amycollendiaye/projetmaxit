@@ -4,13 +4,20 @@
         "psr-4": {
             "Projet\\src\\": "src/",
             "Src\\Entity\\": "src/entity",
-            "Src\\Repository\\":"src/repository",
-            "Src\\Controller\\":"src/controller",
-            "Src\\Service\\":"src/service",
-             "projet\\App\\":"app/",
-             "App\\config\\":"app/config/",
-            "App\\core\\":"app/core/",
-            "App\\core\\Abstract\\":"app/core/abstract"
+            "Src\\Controller\\": "src/controller",
+            "Src\\Service\\": "src/service",
+            "Src\\Repository\\": "src/repository",
+
+
+
+            "App\\Config\\":"app/config",
+            "App\\Core\\":"app/core",
+            "App\\Core\\Middleware\\":"app/core/middlewares",
+            "App\\Core\\Abstract\\":"app/core/abstract"
+
+
+
+           
             
 
 
@@ -28,5 +35,7 @@
             "email": "amycollendiaye103@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
 }
