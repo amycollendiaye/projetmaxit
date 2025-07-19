@@ -1,0 +1,13 @@
+core:
+      database: App\Core\Database
+      session: App\Core\Session
+
+service:
+        compteService: Src\Service\CompteService
+        securityService: Src\Service\SecurityService
+
+repository:
+          compteRepository: Src\Repository\CompteRepository
+          transactionRepository: Src\Repository\TransactionRepository
+          utilisateurRepository: Src\Repository\UtilisateurRepository
+          

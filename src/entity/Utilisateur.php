@@ -1,6 +1,5 @@
 <?php
  namespace Src\Entity;
- namespace Src\Entity\Profil;
 
  class Utilisateur
 {
@@ -149,13 +148,12 @@
     }
      public function gettypecompte ()
      {
-          return $this->$typecompte;
+          return $this->typecompte;
      }
-      public function addtypecompte($utilisateur)
-      {
-         return $this->utilsateur=$utilisateur;
-
-      }
+    //   public function addtypecompte($compte)
+    //   {
+    //      return $this->compte[]=$compte;
+    //   }
 
      /**
       * Get the value of profil

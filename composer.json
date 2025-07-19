@@ -7,27 +7,13 @@
             "Src\\Controller\\": "src/controller",
             "Src\\Service\\": "src/service",
             "Src\\Repository\\": "src/repository",
-
-
-
             "App\\Config\\":"app/config",
             "App\\Core\\":"app/core",
-            "App\\Core\\Middleware\\":"app/core/middlewares",
-            "App\\Core\\Abstract\\":"app/core/abstract"
+            "App\\Core\\Middleware\\":"app/core/middleware",
+            "App\\Core\\Abstract\\":"app/core/abstract",
+            "App\\Migrations\\":"migrations/"
 
-
-
-           
-            
-
-
-
-
-
-
-
-
-        }
+        } 
     },
     "authors": [
         {
@@ -36,6 +22,7 @@
         }
     ],
     "require": {
-        "vlucas/phpdotenv": "^5.6"
+        "vlucas/phpdotenv": "^5.6",
+        "symfony/yaml": "^7.3"
     }
 }

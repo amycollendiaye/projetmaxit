@@ -1,7 +1,11 @@
-<?php $errors = $this->session->get('errors'); 
-$this->session->unset()
-?>
+<?php
+$errors =$this->session->get('errors');
+$this->session->unset("errors");
 
+
+
+ 
+?>
 <div class="max-w-md mx-auto  p-6"> 
             <div class="flex gap-4">
                 <h1 class="text-2xl font-bold text-center text-gray-800 mb-8">

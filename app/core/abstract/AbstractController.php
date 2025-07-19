@@ -1,17 +1,20 @@
 <?php
 namespace App\Core\Abstract;
- use App\Core\Session;
+
+use App\Core\App;
+use App\Core\Session;
 
 abstract class AbstractController{
      
       protected  Session $session;
       protected string $layout ='security';
 
-     public function __construct(){
-        $this->session=Session::getInstance();
+     public function  __construct(){
+        $this->session=App::getDependency("session");
      }
     abstract public function  index();
-    protected function renderhtml($view)
+
+    protected function renderhtml(string $view = "",array $data = [])
     {
             
             ob_start();

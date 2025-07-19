@@ -1,9 +1,11 @@
 <?php
 namespace App\Core;
 
+use PDO;
+
 class Validator
 {
-    public static function validateInscription(array $data, \PDO $pdo): array
+    public static function validateInscription(array $data, PDO $pdo): array
     {
         $errors = [];
 

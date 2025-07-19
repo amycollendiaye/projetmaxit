@@ -2,7 +2,7 @@
             
             <!-- Éléments décoratifs optionnels -->
       
-           <div class="w-[50%] h-[80%] shadow-lg shadow-red-500/50  rounded-lg  gap-[10px] flex-col  flex  justify-center  p-10 "> 
+           <div class="w-[50%] h-[80%]  rounded-lg  gap-[10px] flex-col  flex  justify-center  p-10 "> 
             <div class="flex  gap-4 justify-center items-center">
                 <h1 class="text-2xl font-bold text-center text-gray-800 mb-8 ">
                     CRÉATION DE COMPTE MAXIT                                    

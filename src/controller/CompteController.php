@@ -1,57 +1,108 @@
 <?php
 namespace Src\Controller;
-use  App\Core\Abstract\AbstractController;
-use  App\Core\Validator;
-
+use App\Core\App;
 use App\Core\Session;
 use Src\Service\CompteService;
-use App\Core\Database;
 use Src\Controller\SecurityController;
+use App\Core\Abstract\AbstractController;
 
+class CompteController extends AbstractController {
+    protected string $layout = 'base';
+    private CompteService $compteService;
 
-
-
-class   CompteController extends AbstractController {
-          protected string $layout ='base';
-          private CompteService  $service ;
- public function __construct()
- {
-    $this->service =new CompteService();
- }
-       public function index(){
-         $SecurityController=new SecurityController();
-         $SecurityController->index();
-   }
-    public function show()
-    {
-       $this->renderhtml('maxit/accueil.html.php');
-    }
-  public function login()
+    public function __construct()
 {
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $numero = $_POST['numero'];
-
-        $user =$this->service->seconnecter($numero);
-       
-        if ($user) {
-      $id=($user["utilisateur_id"]);
-   $data=$this->service->getiduser($id);
-   
-Session::set('donnes', $data);
-         
-            header("location:/show");
-            exit;
-        } else {
-                var_dump("amycolle");
-
-            // $errors['login'] = "Numéro de téléphone inconnu";
-            // $this->session->set('errors', $errors);
-            self::index();
-        }
-    } else {
-       var_dump("echoue");
-        self::index();
+        parent::__construct();
+        $this->compteService = App::getDependency("compteService");
     }
-}
+    
+    public function transaction()
+    {
+         $alltransaction=( $this->session->get('all'));     
+        $this->renderhtml('maxit/listtransaction.html.php', ["all"=>$alltransaction]);
 
+     }
+    public function index(){
+        $SecurityController = new SecurityController();
+        $SecurityController->index();
+    }
+    
+public function show()
+    {
+        
+       
+$data = $this->session->get('donnescompte');
+        
+        if ($data === null) {
+            header("Location: /");
+            exit;
+        }
+        
+    
+        $transaction  = $this->session->get('transaction');
+
+        $this->renderhtml('maxit/accueil.html.php',[$data ,$transaction] );
+    }
+    
+    public function login()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $numero = $_POST['numero'];
+
+            $user = $this->compteService->seconnecter($numero);
+           
+            if ($user) {
+                $utilisateurId = $user["utilisateur_id"];
+            $compteId = $user["id"];
+
+                // Récupérer les données spécifiques à cet utilisateur
+                $dataCompte= $this->compteService->getiduser($utilisateurId);
+                
+                $transaction = $this->compteService->gettransactionuser($compteId);
+                $alltransaction=$this->compteService->alltransaction($compteId);
+                
+            $this->session->set('user_id', $utilisateurId);
+            $this->session->set('compte_id', $compteId);
+            $this->session->set('all', $alltransaction);
+
+            $this->session->set('donnescompte', $dataCompte);
+            $this->session->set('transaction', $transaction);
+               
+            $data= $this->session->get('donnescompte');
+          
+           $transaction= $this->session->get('transaction');
+            
+           
+
+             
+                header("location:/show");
+                exit;
+            } else {
+                self::index();
+            }
+        } else {
+            self::index();
+    }
+        }
+
+    public function logout(){
+         if ($_SERVER["REQUEST_METHOD"]=="POST")
+         {
+            $this->session->destroy();
+        header("location:/");
+        exit;
+         }
+           header("location:show");
+        exit;
+         
+      
+    }
+      public function create( )
+
+      {
+         // $this->layout="null";
+                 $this->renderhtml("maxit/comptesecondaire.html.php");
+
+      }
+    
 }

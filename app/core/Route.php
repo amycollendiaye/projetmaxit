@@ -11,6 +11,27 @@ use Src\Controller\SecurityController;
         {
             $route=$route [$uri];
             
+            // 
+             if(!empty($route['middleware']))
+             {
+                 
+                foreach (($route['middleware']) as $middlewarekey=>$middlewarevalue){
+              
+              
+                  
+                    $middlewareClass=$middlewarevalue;
+                    $middlewareInstance=new $middlewareClass();
+                   
+                if(is_callable($middlewareInstance))
+                {
+                             $middlewareInstance();  
+                 }   
+
+
+                        }
+                }
+             }
+
             $controller = $route['controller'];
 
             $method=$route['fonction'];
@@ -22,13 +43,13 @@ use Src\Controller\SecurityController;
       
 
         }
-        else
-        {
-             $InscriptionController =new SecurityController();
-             ($InscriptionController->index());
-        }
+        // else
+        // {
+        //      $InscriptionController =new SecurityController();
+        //      ($InscriptionController->index());
+        // }
 
 
      }
- }
+ 
 

@@ -1,9 +1,17 @@
+<?php
+
+    $data = $this->session->get('donnescompte');
+    $solde=$data["solde"];
+
+             
+
+?> 
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paiement - MAXIT SA</title>
+    <title>Compte - MAXIT SA</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
     <script>
@@ -47,8 +55,8 @@
                         <i class="fas fa-user text-white"></i>
                     </div>
                     <div>
-                        <div class="font-medium">AMYCOLLE</div>
-                        <div class="text-sm text-gray-400">775626565</div>
+                        <div class="font-medium"><?= $name ?></div>
+                        <div class="text-sm text-gray-400"><?= $numero?></div>
                     </div>
                 </div>
             </div>
@@ -81,7 +89,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="flex items-center gap-3 p-4 rounded-lg hover:bg-gray-700 transition-colors">
+                        <a href="create" class="flex items-center gap-3 p-4 rounded-lg hover:bg-gray-700 transition-colors">
                             <i class="fas fa-plus-circle text-maxit-orange"></i>
                             <span>Créer compte</span>
                         </a>
@@ -89,17 +97,46 @@
                 </ul>
             </nav>
 
-            <!-- Bouton de déconnexion -->
+            <!-- Bou foton de déconnexion -->
+              <form action="logout" method="post" >
             <div class="p-4 border-t border-gray-700">
-                <a href="#" class="flex items-center gap-3 p-4 rounded-lg hover:bg-red-600 transition-colors text-red-400 hover:text-white">
+                <button  type="submit" class="flex items-center gap-3 p-4 rounded-lg hover:bg-red-600 transition-colors text-red-400 hover:text-white"> deconnexion
                     <i class="fas fa-sign-out-alt"></i>
-                    <span>Déconnexion</span>
-                </a>
+                </button>
             </div>
+            </form>
         </div>
+    <div class="flex-1 p-4">
+            <!-- Header -->
+            <div class="flex    justify-evenly items-center mb-2">
+<div class="flex-1 max-w-md">
+                    <input type="text" class="w-full px-4 py-3 border-2 border-maxit-orange rounded-full outline-none focus:border-orange-500" placeholder="Rechercher une transaction...">
+                </div>                     <div class="bg-white p-2 rounded-xl text-center shadow-md border-t-4 border-maxit-orange">
+                    <div class="text-gray-600 text-lg">Solde actuel (FCFA)</div>
+
+<div class="text-3xl font-bold text-maxit-orange mb-2"><?= number_format($solde, 2, ',', ' ') ?>F</div>                    <button class="bg-maxit-orange text-white px-4 py-2 rounded-lg hover:bg-maxit-light-orange transition-colors">
+                        <i class="fas fa-qrcode mr-2"></i>
+                        Scanner
+                    </button>
+                </div>
+                <div class="flex items-center gap-4">
+                    <select class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-maxit-orange">
+                        <option>Principal</option>
+                        <option>Secondaire</option>
+                    </select>
+                
+                            </div>
+
+            </div>
+             <div class="bg-maxit-orange text-white p-4  rounded-2xl mb-2 ">
+            <h1 class="text-2xl md:text-2xl font-bold mb-3  ">Historique des Transactions</h1>
+            <p class="text-lg opacity-90">Gérez et consultez toutes vos transactions facilement</p>
+        </div>
+                <?php  echo  $contentForLayout ?>
+
+            </div>
 
         <!-- Contenu principal -->
-                          <?php  echo  $contentForLayout ?>
 
     </div>
 </body>

@@ -1,21 +1,36 @@
 <?php
 namespace Src\Controller;
-use App\Core\Abstract\AbstractController;
-use Src\Repository\UtilisateurRepository;
-use Src\Service\UtilisateurService;
-use App\Core\FileUpload;
+use PDO;
+use App\Core\App;
+use App\Core\Session;
 use App\Core\Database;
 use  App\Core\Validator;
-use App\Core\Session;
-
+use App\Core\FileUpload;
+use Src\Service\SecurityService;
+use Src\Service\UtilisateurService;
+use App\Core\Abstract\AbstractController;
+use Src\Repository\UtilisateurRepository;
 
 class InscriptionController extends AbstractController {
+    private SecurityService $securityService;
+        private PDO $pdo; 
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->securityService= App::getDependency('securityService') ;
+        $this->pdo=App::getDependency("database");
+
+    }
+        
     
-    public function index(){
+    public function index()
+    {
         $this->renderhtml('inscription/inscription.html.php');
     }
     
-    public function inscrire() {
+    public function inscrire() 
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             // Upload des fichiers
@@ -33,23 +48,19 @@ class InscriptionController extends AbstractController {
             ];
             
             // Validation
-            $pdo = Database::getConnection();
-// var_dump($errors);
+            $errors = Validator::validateInscription($data, $this->pdo);
+            $this->session->set("errors",$errors);
+            
 
-// die;
-                $errors = Validator::validateInscription($data, $pdo);
 
             
             // Inscription
-            $service = new UtilisateurService();
-            if ($service->inscrire($data)) {
-                 var_dump('geirgj');
+            if ($this->securityService->inscrire($data)) {
                  header("location:/");
                  exit;
             } else 
             { 
 
-                Session::set('errors', $errors);
                 self::index();
             }
         }

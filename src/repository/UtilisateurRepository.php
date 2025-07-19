@@ -1,16 +1,26 @@
 <?php
 namespace Src\Repository;
-use App\Core\Database;
-use App\Entity\Utilisateur;
+
+use App\Core\Abstract\AbstractRepository;
 use PDO;
 
-class UtilisateurRepository {
-    private PDO $pdo;
+class UtilisateurRepository extends AbstractRepository {
 
-    public function __construct()
+    private static   ?UtilisateurRepository $utilisateurRepository=null;
+
+    private function __construct()
     {
-        $this->pdo = Database::getConnection();
+         parent::__construct();
     }
+     public   static function getInstance()
+     {
+        if (self::$utilisateurRepository===null)
+        {
+            self::$utilisateurRepository=new self();
+
+        }
+        return self::$utilisateurRepository;
+     }
     
     public function getLogin($login)
     {
@@ -41,22 +51,14 @@ class UtilisateurRepository {
     public function create(array $userData): bool
     {
         try {
-            // echo "Repository - Début de la transaction<br>";
             $this->pdo->beginTransaction();
 
-            // Debug des données reçues
-            // echo "Repository - Données reçues:<br>";
-            // // var_dump($userData);
-            // // echo "<br>";
-
-            // Insertion utilisateur
             $sqlUser = "INSERT INTO utilisateur (
                 nom, prenom, pieceidentite, numerotelephone, photorecto, profil_id, photoverso, adresse
             ) VALUES (
                 :nom, :prenom, :pieceidentite, :numerotelephone, :photorecto, :profil_id, :photoverso, :adresse
             )";
             
-            // echo "Repository - Requête SQL utilisateur:<br>" . $sqlUser . "<br><br>";
             
             $stmtUser = $this->pdo->prepare($sqlUser);
             
@@ -65,38 +67,28 @@ class UtilisateurRepository {
                 ':prenom' => $userData['prenom'],
                 ':pieceidentite' => $userData['pieceidentite'],
                 ':numerotelephone' => $userData['numerotelephone'],
-                ':photorecto' => $userData['recto'], // ✅ Correction ici
+                ':photorecto' => $userData['recto'], 
                 ':profil_id' => 1,
-                ':photoverso' => $userData['verso'], // ✅ Correction ici
+                ':photoverso' => $userData['verso'], 
                 ':adresse' => $userData['adresse']
             ];
             
-            // echo "Repository - Paramètres utilisateur:<br>";
-            // var_dump($userParams);
-            // echo "<br>";
             
             $resultUser = $stmtUser->execute($userParams);
-            // echo "Repository - Résultat insertion utilisateur: " . ($resultUser ? 'SUCCESS' : 'FAILED') . "<br>";
             
             if (!$resultUser) {
-                // echo "Repository - Erreur SQL utilisateur:<br>";
-                // var_dump($stmtUser->errorInfo());
-                // echo "<br>";
+               
                 $this->pdo->rollBack();
                 return false;
             }
 
             $userId = $this->pdo->lastInsertId();
-            // echo "Repository - ID utilisateur créé: " . $userId . "<br>";
-
-            // Insertion compte
+        
             $sqlCompte = "INSERT INTO compte (
                 numero, solde, type, utilisateur_id,numerotelephone
             ) VALUES (
                 :numero, :solde, :type, :utilisateur_id,:numerotelephone
             )";
-            
-            // echo "Repository - Requête SQL compte:<br>" . $sqlCompte . "<br><br>";
             
             $stmtCompte = $this->pdo->prepare($sqlCompte);
             
@@ -110,32 +102,16 @@ class UtilisateurRepository {
 
             ];
             
-            // echo "Repository - Paramètres compte:<br>";
-            // var_dump($compteParams);
-            // echo "<br>";
-            
-            $resultCompte = $stmtCompte->execute($compteParams);
-            // echo "Repository - Résultat insertion compte: " . ($resultCompte ? 'SUCCESS' : 'FAILED') . "<br>";
-            
-       /*      if (!$resultCompte) {
-                // echo "Repository - Erreur SQL compte:<br>";
-                // var_dump($stmtCompte->errorInfo());
-                // echo "<br>";
-                $this->pdo->rollBack();
-                return false;
-            } */
-
+            $stmtCompte->execute($compteParams);
             $this->pdo->commit();
-echo "Repository - Transaction commitée avec succès<br>";
             return true;
-            
-        } catch (\Exception $e) {
-            echo "Repository - Exception: " . $e->getMessage() . "<br>";
-            echo "Repository - Stack trace: " . $e->getTraceAsString() . "<br>";
-            echo 'echouer';
+            } 
+            catch (\Exception $e) 
+            {
+            // echo 'echec insertion des donnees  pour inscription';
             $this->pdo->rollBack();
             return false;
-        }
+            }
     }
 
     public function update(int $id, array $data): bool
