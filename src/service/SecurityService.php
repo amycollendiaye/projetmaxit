@@ -1,41 +1,34 @@
 <?php
-namespace Src\Service;
-
-
+namespace App\Service;
 use App\Core\App;
-use Src\Repository\UtilisateurRepository;
+use App\Repository\UserRepository;
+use App\Entity\User;
 
-class SecurityService
-{
-     private static ?SecurityService  $securityService=null; 
-     private   UtilisateurRepository  $utilisateurRepository;
-
-    private function __construct()
+    class SecurityService
     {
-        $this->utilisateurRepository =App::getDependency("utilisateurRepository");
-    }
+        private static ?SecurityService $securityService = null;
+        private UserRepository $userRepository;
 
-    public  static function   getInstance()
-    {
-        if(self::$securityService==null)
-         {
-              self::$securityService=  new self();
+        private function __construct()
+        {
+            $this->userRepository = App::getDependency('userRepository');
         }
-         return self::$securityService;
-    }
 
-    public function inscrire(array $userData): bool
-    {
-        try {
-      
-            
-            $result = $this->utilisateurRepository->create($userData);
-            
-            return $result;
-            
-        } catch (\Exception $e) {
-            echo "Service - Exception: " . $e->getMessage() . "<br>";
-            return false;
+        public static function getInstance(): SecurityService
+        {
+            if (self::$securityService === null) {
+                self::$securityService = new SecurityService();
+            }
+            return self::$securityService;
         }
+       public function seConnecter(string $login, string $password){
+
+        $user = $this->userRepository->findByLogin($login);
+           if (!$user || $user->getPassword() !== $password) {
+               return null;
+           }
+           return $user;
+       }
+
+       
     }
-}

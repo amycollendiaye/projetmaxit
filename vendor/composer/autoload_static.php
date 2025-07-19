@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit26be9d71d941cac4b0efc0d00ca11b73
+class ComposerStaticInit4405c6137af49f92a4f7336d399b1810
 {
     public static $files = array (
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
@@ -20,14 +20,9 @@ class ComposerStaticInit26be9d71d941cac4b0efc0d00ca11b73
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Ctype\\' => 23,
             'Symfony\\Component\\Yaml\\' => 23,
-            'Src\\Service\\' => 12,
-            'Src\\Repository\\' => 15,
-            'Src\\Entity\\' => 11,
-            'Src\\Controller\\' => 15,
         ),
         'P' => 
         array (
-            'Projet\\src\\' => 11,
             'PhpOption\\' => 10,
         ),
         'G' => 
@@ -40,11 +35,16 @@ class ComposerStaticInit26be9d71d941cac4b0efc0d00ca11b73
         ),
         'A' => 
         array (
-            'App\\Migrations\\' => 15,
-            'App\\Core\\Middleware\\' => 20,
+            'App\\Service\\' => 12,
+            'App\\Seeders\\' => 12,
+            'App\\Repository\\' => 15,
+            'App\\Migration\\' => 14,
+            'App\\Entity\\' => 11,
+            'App\\Core\\Midellwares\\' => 21,
             'App\\Core\\Abstract\\' => 18,
             'App\\Core\\' => 9,
-            'App\\Config\\' => 11,
+            'App\\Controller\\' => 15,
+            'App\\' => 4,
         ),
     );
 
@@ -65,26 +65,6 @@ class ComposerStaticInit26be9d71d941cac4b0efc0d00ca11b73
         array (
             0 => __DIR__ . '/..' . '/symfony/yaml',
         ),
-        'Src\\Service\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src/service',
-        ),
-        'Src\\Repository\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src/repository',
-        ),
-        'Src\\Entity\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src/entity',
-        ),
-        'Src\\Controller\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src/controller',
-        ),
-        'Projet\\src\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src',
-        ),
         'PhpOption\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
@@ -97,13 +77,29 @@ class ComposerStaticInit26be9d71d941cac4b0efc0d00ca11b73
         array (
             0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
         ),
-        'App\\Migrations\\' => 
+        'App\\Service\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/service',
+        ),
+        'App\\Seeders\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/seeders',
+        ),
+        'App\\Repository\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/repository',
+        ),
+        'App\\Migration\\' => 
         array (
             0 => __DIR__ . '/../..' . '/migrations',
         ),
-        'App\\Core\\Middleware\\' => 
+        'App\\Entity\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/app/core/middleware',
+            0 => __DIR__ . '/../..' . '/src/entity',
+        ),
+        'App\\Core\\Midellwares\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/app/core/midellewares',
         ),
         'App\\Core\\Abstract\\' => 
         array (
@@ -113,9 +109,13 @@ class ComposerStaticInit26be9d71d941cac4b0efc0d00ca11b73
         array (
             0 => __DIR__ . '/../..' . '/app/core',
         ),
-        'App\\Config\\' => 
+        'App\\Controller\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/app/config',
+            0 => __DIR__ . '/../..' . '/src/controller',
+        ),
+        'App\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/app',
         ),
     );
 
@@ -131,9 +131,9 @@ class ComposerStaticInit26be9d71d941cac4b0efc0d00ca11b73
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit26be9d71d941cac4b0efc0d00ca11b73::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit26be9d71d941cac4b0efc0d00ca11b73::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit26be9d71d941cac4b0efc0d00ca11b73::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit4405c6137af49f92a4f7336d399b1810::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit4405c6137af49f92a4f7336d399b1810::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit4405c6137af49f92a4f7336d399b1810::$classMap;
 
         }, null, ClassLoader::class);
     }

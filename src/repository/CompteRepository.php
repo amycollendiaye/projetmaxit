@@ -1,80 +1,56 @@
 <?php
-namespace Src\Repository;
+namespace App\Repository;
 
-use App\Core\App;
-use App\Core\Database;
+use App\Core\Abstract\AbstractRepository;
+use App\Entity\Compte;
+use App\Entity\User;
 use PDO;
 
-class CompteRepository {
-    private PDO $pdo;
-     private static ?CompteRepository $compteRepository=null;
+use function PHPSTORM_META\map;
 
-    public function __construct()
-    {
-        $this->pdo = App::getDependency("database");
-    }
-     public  static  function getInstance()
-     {
-            if(self::$compteRepository===null)
-            {
-                self::$compteRepository=new self();
-            }
-             return  self::$compteRepository;
-     }
-
-
-    public function selectbynumero($numero)
-    { 
-        $sql = "SELECT * FROM compte WHERE numerotelephone = :numero";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->bindParam(':numero', $numero);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
-    }
-
-    public function selectbycompte($id)
-    { 
-        $sql = "SELECT utilisateur.nom, compte.id, compte.numerotelephone, utilisateur.prenom, compte.solde 
-                FROM compte 
-                JOIN utilisateur ON utilisateur.id = compte.utilisateur_id 
-                WHERE utilisateur.id = :id";
-        
-        $stmt = $this->pdo->prepare($sql);         
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
-       
-        return $stmt->fetch(PDO::FETCH_ASSOC) ?? null;
-    }
-
-    public function selectbytransaction($compteId)
-    {
-        $sql = "SELECT t.id, t.date, t.type, t.montant, c.numerotelephone, c.solde
-                FROM transaction t
-                JOIN compte c ON c.id = t.compte_id 
-                WHERE c.id = :compteId
-                ORDER BY t.date DESC, t.id DESC
-                LIMIT 6";
-
-        $stmt = $this->pdo->prepare($sql);         
-        $stmt->bindParam(':compteId', $compteId, PDO::PARAM_INT);
-        $stmt->execute();
-       
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-      public function  selectall($compteId)
-    {
-            $sql = "SELECT t.id, t.date, t.type, t.montant, c.numerotelephone, c.solde
-                FROM transaction t
-                JOIN compte c ON c.id = t.compte_id 
-                WHERE c.id = :compteId
-                ORDER BY t.date DESC, t.id DESC";
-
-        $stmt = $this->pdo->prepare($sql);         
-        $stmt->bindParam(':compteId', $compteId, PDO::PARAM_INT);
-        $stmt->execute();
-       
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-      
+class CompteRepository extends AbstractRepository
+{
+   private static ?CompteRepository $instance = null;
   
+
+   public function __construct()
+   {
+       parent::__construct();
+       $this->table='compte';
+   }
+
+   public static function getInstance(): CompteRepository
+   {
+       if (self::$instance === null) {
+           self::$instance = new CompteRepository();
+       }
+       return self::$instance; 
+   }
+    public function selectAll(){
+
+    }
+     public function insert($entity){
+
+     }
+     public function update($entity){
+
+     }
+     public function delete(){
+
+     }
+     public function findByUser(User $user) {
+
+        $query= 'select * from '. $this->table . ' where users_id = :user_id';
+
+        $stmt=$this->pdo->prepare($query);
+        $stmt->execute([
+            'user_id'=>$user->getId()
+        ]);
+
+        $rows=$stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        return array_map(fn($compte)=> Compte::toObject($compte),$rows);
+        
+
+     }
 }

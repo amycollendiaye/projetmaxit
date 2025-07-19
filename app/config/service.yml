@@ -3,11 +3,11 @@ core:
       session: App\Core\Session
 
 service:
-        compteService: Src\Service\CompteService
-        securityService: Src\Service\SecurityService
+      compteService: App\Service\CompteService
+      securityService:   App\Service\SecurityService
 
 repository:
-          compteRepository: Src\Repository\CompteRepository
-          transactionRepository: Src\Repository\TransactionRepository
-          utilisateurRepository: Src\Repository\UtilisateurRepository
-          
+      compteRepository: App\Repository\CompteRepository
+      transactionRepository:  App\Repository\TransactionRepository
+      userRepository:  App\Repository\UserRepository
+

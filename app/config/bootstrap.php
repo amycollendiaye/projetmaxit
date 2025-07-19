@@ -1,12 +1,13 @@
 <?php
-use App\Core\Route;
-use Src\Entity\Utilisateur;
+
+require_once __DIR__ . '/env.php';
+require_once __DIR__ . '/../tranlate/fr/error.fr.php';
+require_once __DIR__.'/herlpers.php';
+require_once __DIR__.'/middlewares.php';
+require_once __DIR__.'/dependencies.php';
+
+
+
+
+
     
-
-require_once '../routes/route.web.php';
-require_once '../vendor/autoload.php';
-require_once '../app/config/env.php';
-require_once '../app/config/middlewares.php';
- require __DIR__ .'/dependencies.php';
-
-Route::resolve($routes,$middlewares);

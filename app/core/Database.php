@@ -1,16 +1,13 @@
 <?php
 namespace App\Core;
-// composer require vlucas/phpdotenv
 use PDO;
-use PDOException;
 
-class Database 
-{
-    private static ?PDO  $pdo = null;
+
+class Database{
+    private static ?PDO $pdo= null;
     public static function getInstance(): PDO
     {
         if (self::$pdo === null) {
-            // Utilisation des constantes définies dans env.php
             self::$pdo = new PDO(
                 DSN,
                 DB_USER,
@@ -25,10 +22,3 @@ class Database
         return self::$pdo;
     }
 }
-// try {
-//     $pdo = Database::getConnection();
-//     echo "Connexion OK";
-// } catch (Exception $e) {
-//     echo "Erreur de connexion : " . $e->getMessage();
-// }
-// die;

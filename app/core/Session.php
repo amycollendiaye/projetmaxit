@@ -1,6 +1,6 @@
 <?php
- namespace App\Core;
-
+namespace App\Core;
+use App\Core\App;
 
 class Session
 {
@@ -12,8 +12,10 @@ private static ?Session $session= null;
     }
   }
   public static function getInstance(){
-    if (self::$session===null ){
-        self::$session=new self();
+    if (self::$session===null ){ 
+     // dd( 'user');
+
+        self::$session=new Session();
     
     }
     return self::$session;

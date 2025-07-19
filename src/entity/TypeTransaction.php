@@ -1,10 +1,12 @@
 <?php
+namespace App\Entity;
 
-namespace  Src\Entity ;
+enum TypeTransaction:string{
 
- enum TypeTransaction :string
- {
-        case PAIEMENT="paiement";
-        case DEPOT= "depot";
-        case RETRAIT= "retrait";
- }
+      case DEPOS='Depos';
+      case RETRAIT='Retrait';
+      case PAIEMENT='Paiement';
+
+    
+
+}
