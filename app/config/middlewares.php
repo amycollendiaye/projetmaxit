@@ -1,12 +1,7 @@
 <?php
+use App\Core\Middleware\Auth;
 
-use App\Core\Midellwares\Auth;
-
-$midellewares=[
-  'auth'=>Auth::class
-  
-
+$middlewares=[
+    "auth"=>Auth::class
 ];
-return $midellewares;
-
-?>
+ return $middlewares; 

@@ -1,27 +1,24 @@
 <?php
- namespace App\Core\Abstract;
+namespace App\Core\Abstract;
+
 use App\Core\App;
 
+use PDO;
 
-
-abstract class AbstractRepository
+ abstract  class AbstractRepository 
 {
-    protected \PDO $pdo;
-    
-     protected string $table;
-
-    public function __construct()
-    {
-        $this->pdo = App::getDependency('database');
-    }
-
-    abstract public function selectAll();
-    abstract public function insert($entity);
-    abstract public function update($entity);
-    abstract public function delete();
+        
+      protected  PDO $pdo; 
+       
+      public function  __construct()
+      {
+          
+         $this->pdo=App::getDependency("database");
+      }
 
 
-
-    
+    // abstract public function selectAll();
+    // abstract public function selectById($id);
+    // abstract public function  insert();
 
 }

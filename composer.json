@@ -1,36 +1,38 @@
 {
-    "name": "maxit/sn",
-    "description": "application de transfert",
-    "type": "project",
-    "license": "MIT",
+    "name": "projet/maxit",
     "autoload": {
         "psr-4": {
-            "App\\": "app/",
-            "App\\Entity\\": "src/entity/",
-            "App\\Repository\\": "src/repository/",
-            "App\\Service\\": "src/service/",
-            "App\\Controller\\": "src/controller/",
-            "App\\Core\\": "app/core/",
-            "App\\Core\\Abstract\\": "app/core/abstract/",
-             "App\\Core\\Midellwares\\": "app/core/midellewares/",
-             "App\\Migration\\": "migrations/",
-             "App\\Seeders\\": "seeders/"
-        }
+            "Projet\\src\\": "src/",
+            "Src\\Entity\\": "src/entity",
+            "Src\\Controller\\": "src/controller",
+            "Src\\Service\\": "src/service",
+            "Src\\Repository\\": "src/repository",
+            "App\\Config\\":"app/config",
+            "App\\Core\\":"app/core",
+            "App\\Core\\Middleware\\":"app/core/middleware",
+            "App\\Core\\Abstract\\":"app/core/abstract",
+            "Seeder\\Seeder\\":"seeders/",
+            "Migration\\Migration\\":"migrations/"
+
+        } 
+    
     },
     "scripts": {
-       "database:migrate": "@php bin/migrate",
-       "database:seed": "@php bin/seed"  
-    },
-    "bin": ["bin/migrate"],
+        "database:migrate":"@php bin/migrate",
+        "database:seed":"@php bin/seed"
 
+
+    },
+    "bin":["bin/migrate",
+            "bin/migrate"        
+],
     "authors": [
         {
-            "name": "amycollendiayec"
+            "name": "amycollendiaye",
+            "email": "amycollendiaye103@gmail.com"
         }
     ],
-    "minimum-stability": "stable",
     "require": {
-        "vlucas/phpdotenv": "^5.6",
-        "symfony/yaml": "^7.3"
+        "vlucas/phpdotenv": "^5.6"
     }
 }

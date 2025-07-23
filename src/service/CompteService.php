@@ -1,32 +1,45 @@
 <?php
-namespace App\Service;
+namespace Src\Service;
+
 use App\Core\App;
-use App\Repository\UserRepository;
-use App\Entity\User;
-use App\Repository\CompteRepository;
-use Attribute;
+use Src\Repository\CompteRepository;
 
 class CompteService {
+    private CompteRepository $repo;
+    private  static  ?CompteService $compteService=null;
 
-  private static ?CompteService $instance = null;
-  
-    private CompteRepository $compteRepository;
+    private function __construct()
+    {
+        $this->repo =  App::getDependency('compteRepository');
+    }
+    
+     public  static function getInstance()
+     {
+        if(self::$compteService==null)
+        {
+            self::$compteService= new  self();
 
-   public function __construct()
-   {
-       $this->compteRepository=App::getDependency('compteRepository');
-   }
-
-   public static function getInstance(): CompteService
-   {
-       if (self::$instance === null) {
-           self::$instance = new CompteService();
-       }
-       return self::$instance; 
-   }
-
-   public function getComptesByUser($user){
-
-return $this->compteRepository->findByUser($user);
-   }
-} 
+        }
+        return  self::$compteService;
+     }
+    
+    public function seconnecter($numero): ?array
+    {
+        return $this->repo->selectbynumero($numero) ?: null;
+    }
+    
+    public function getiduser($id)
+    {
+        return $this->repo->selectbycompte($id);
+    }
+    
+    public function gettransactionuser($compteId)
+    {
+        return $this->repo->selectbytransaction($compteId);
+    }
+     public function alltransaction($compteId)
+    {
+        return $this->repo->selectall($compteId);
+        
+    }
+}   

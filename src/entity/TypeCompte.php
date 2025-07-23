@@ -1,8 +1,8 @@
 <?php
-namespace App\Entity;
- enum TypeCompte:string {
+  namespace Src\Entity;
 
-    case  PRINCIPAL = 'Principal';
-     case SECONDAIRE = 'Secondaire';
- }
-    
+  enum TypeCompte:string 
+  {
+     case PRINCIPAL="client";
+     case SECONDAIRE="secondaire";
+  }

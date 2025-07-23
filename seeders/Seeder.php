@@ -1,38 +1,40 @@
 <?php
+namespace Seeder\Seeder;
+
+
+use PDO;
+use Exception;
+use PDOException;
 
 class Seeder
 {
-    private PDO $pdo;
+    private  PDO $pdo;
     private string $driver;
-
-    public function __construct(PDO $pdo)
+    public  function __construct(PDO $pdo)
     {
-        $this->pdo = $pdo;
-        $this->driver = $this->pdo->getAttribute(PDO::ATTR_DRIVER_NAME);
+        $this->pdo=$pdo;
+        $this->driver=$pdo->getAttribute(PDO::ATTR_DRIVER_NAME);
     }
-
-    public function run()
+     public function  run ()
+     {
+         try {
+            
+        $this->seedDatabase();
+         echo ( "insertion faite avec  succes ");
+    } catch ( PDOException $e) {
+             die("echec insertion des donnes   ".$e->getMessage());
+         }
+     }
+    public  function seedDatabase()
     {
-        try {
-            $this->seedDatabase(); // $this->insertIntoDB();
-            echo "Base de données peuplée avec succès.\n";
-
-        } catch (PDOException $e) {
-            die("Erreur de seed: " . $e->getMessage());
-        }
-    }
-
-    private function seedDatabase()
-    {
-        $sql = match ($this->driver) {
-            // database/insert_mysql.sql
-            // database/insert_postgres.sql
-            // remplacer les chemins par les chemins réels de vos fichiers SQL
-            'mysql' => file_get_contents(__DIR__ . '/seeds/mysql.sql'),
-            'pgsql' => file_get_contents(__DIR__ . '/seeds/postgres.sql'),
-            default => throw new Exception("Driver non supporté: " . $this->driver),
+        $sql=match ($this->driver) {
+            "mysql" => file_get_contents(__DIR__.'/../databases/insert_mysql.sql') ,
+            "pgsql" => file_get_contents(__DIR__.'/../databases/insert_pgsql.sql') ,
+            default => throw new Exception("le driver  n' existe pas  "),
+ 
         };
-        $this->pdo->exec($sql);
+         return $this->pdo->exec($sql);
+        
     }
 
 }
