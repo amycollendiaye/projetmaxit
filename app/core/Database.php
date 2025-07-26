@@ -16,12 +16,10 @@ class Database
     public static function getInstance(): PDO
     {
 # DB_DSN_MYSQL=mysql:host=127.0.0.1;dbname=mrsfall;port=3306
-
-        $dns='pgsql:host=centerbeam.proxy.rlwy.net;dnmane=railway;port13388';
         if (self::$pdo === null) {
             // Utilisation des constantes définies dans env.php
             self::$pdo = new PDO(
-                $dns,
+'pgsql:host=centerbeam.proxy.rlwy.net;dbmane=railway;port13388',
                 "postgres",
                 "qIYxSUkXYhWdzpORswiEreFPlqNoXPfc",
                 [
