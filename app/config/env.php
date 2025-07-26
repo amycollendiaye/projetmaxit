@@ -3,7 +3,16 @@
 
 
 use Dotenv\Dotenv;
+//     DB_USER_POSTGRES=postgres
+// DB_PASS_POSTGRES=qIYxSUkXYhWdzpORswiEreFPlqNoXPfc
+// DB_HOST_POSTGRES=centerbeam.proxy.rlwy.net
+// DB_PORT_POSTGRES=13388
 
+
+// DB_NAME= railway
+
+
+// DB_NAME= railway
 $dotenv = Dotenv::createUnsafeImmutable(dirname(__DIR__,2));
 $dotenv->load();
  // NOM  DU DRIVER
