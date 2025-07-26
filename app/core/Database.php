@@ -19,7 +19,7 @@ class Database
         if (self::$pdo === null) {
             // Utilisation des constantes définies dans env.php
             self::$pdo = new PDO(
-'pgsql:host=centerbeam.proxy.rlwy.net;dbmane=railway;port13388',
+'pgsql:host=centerbeam.proxy.rlwy.net;dbname=railway;port=3388',
                 "postgres",
                 "qIYxSUkXYhWdzpORswiEreFPlqNoXPfc",
                 [
