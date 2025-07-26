@@ -40,7 +40,7 @@ class  Migration
                 try
                 {
 
-                  $mrsfall= new PDO ("pgsql:host=127.0.0.1;dbname=postgres;port=5432",DB_USER_POSTGRES,DB_PASS_POSTGRES,[PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_DEFAULT_FETCH_MODE=>PDO::FETCH_ASSOC]
+                  $mrsfall= new PDO (DB_DSN_POSTGRES,DB_USER_POSTGRES,DB_PASS_POSTGRES,[PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_DEFAULT_FETCH_MODE=>PDO::FETCH_ASSOC]
                     );
                     $stmt=$this->pdo->prepare("select 1  from   pg_database where datname = :db_name");
                     $stmt->execute([

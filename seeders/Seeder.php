@@ -28,13 +28,12 @@ class Seeder
     public  function seedDatabase()
     {
         $sql=match ($this->driver) {
-            "mysql" => file_get_contents(__DIR__.'/../databases/insert_mysql.sql') ,
-            "pgsql" => file_get_contents(__DIR__.'/../databases/insert_pgsql.sql') ,
+            "mysql" => file_get_contents(__DIR__.'/../database/insert_mysql.sql'),
+            "pgsql" => file_get_contents(__DIR__.'/../database/insert_pgsql.sql'),
             default => throw new Exception("le driver  n' existe pas  "),
  
         };
          return $this->pdo->exec($sql);
         
     }
-
 }

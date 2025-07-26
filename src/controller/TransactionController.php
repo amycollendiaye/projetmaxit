@@ -19,7 +19,7 @@
         
 //         if ($compteId === null) {
 //             header("Location: /");
-//             exit;
+ //             exit;
 //         }
         
 //         $transactions = $this->service->getTransactionsByCompte($compteId);
@@ -28,4 +28,4 @@
 //             'tranactions' => $transactions
 //         ]);
 //     }
-// } 
+// 

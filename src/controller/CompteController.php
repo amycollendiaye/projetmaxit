@@ -1,18 +1,25 @@
 <?php
 namespace Src\Controller;
+use PDO;
 use App\Core\App;
 use App\Core\Session;
+use App\Core\Database;
+use App\Core\Validator;
 use Src\Service\CompteService;
 use Src\Controller\SecurityController;
 use App\Core\Abstract\AbstractController;
 
 class CompteController extends AbstractController {
     protected string $layout = 'base';
+    private PDO $pdo;
     private CompteService $compteService;
+     
 
     public function __construct()
 {
         parent::__construct();
+        // $this->pdo =$pdo;
+
         $this->compteService = App::getDependency("compteService");
     }
     
@@ -104,5 +111,20 @@ $data = $this->session->get('donnescompte');
                  $this->renderhtml("maxit/comptesecondaire.html.php");
 
       }
+        public function createcompte()
+        {
+             if($_SERVER["REQUEST_METHOD"]==="POST")
+            {
+               $data=[
+
+              $number=  trim($_POST['telephone']),
+                $solde= trim($_POST['solde']),
+               ];
+               var_dump($number);
+                die;
+                $errors=Validator::validateInscription($data ,$this->pdo);
+            }
+           
+        }
     
 }

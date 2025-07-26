@@ -22,6 +22,8 @@
         }
     </script>
 </head>
+<!-- required
+pattern="^(\+221|221)?[0-9\s\-]{8,}$" -->
 <body class="min-h-screen bg-gradient-to-br from-orange-50 to-orange-100 flex items-center justify-center p-4">
     <div class="w-full max-w-4xl bg-white rounded-2xl shadow-2xl overflow-hidden">
         <div class="flex min-h-[600px]">
@@ -35,7 +37,7 @@
                    
 
                     <!-- Formulaire -->
-                    <form class="space-y-6" method="post" action="create-account" >
+                    <form class="space-y-6" method="post" action="create" >
                         <!-- Numéro de téléphone -->
                         <div>
                             <label class="block text-gray-700 font-medium mb-2">
@@ -44,12 +46,11 @@
                             </label>
                             <input 
                                 type="tel" 
-                                name="numero" 
+                                name="telephone" 
                                 id="numero"
                                 class="w-full p-4 bg-maxit-peach border-0 rounded-lg focus:ring-2 focus:ring-maxit-orange focus:outline-none transition-all duration-200" 
                                 placeholder="Ex: +221 77 123 45 67"
-                                required
-                                pattern="^(\+221|221)?[0-9\s\-]{8,}$"
+                                
                             >
                         </div>
 
@@ -66,8 +67,7 @@
                                 class="w-full p-4 bg-maxit-peach border-0 rounded-lg focus:ring-2 focus:ring-maxit-orange focus:outline-none transition-all duration-200" 
                                 placeholder="Ex: 5000"
                                 min="0"
-                                step="1"
-                                required
+                              
                             >
                         </div>
 
