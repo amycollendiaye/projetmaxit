@@ -2,6 +2,10 @@
 
     $data = $this->session->get('donnescompte');
     $solde=$data["solde"];
+  $prenom=  ($data["prenom"] );
+  $nom=($data["nom"]);
+   $name="    $prenom $nom ";
+   $numero=$data["numerotelephone"]
 
              
 
