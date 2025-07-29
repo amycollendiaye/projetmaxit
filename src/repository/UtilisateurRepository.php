@@ -54,9 +54,9 @@ class UtilisateurRepository extends AbstractRepository {
             $this->pdo->beginTransaction();
 
             $sqlUser = "INSERT INTO utilisateur (
-                nom, prenom, pieceidentite, numerotelephone, photorecto, profil_id, photoverso, adresse
+                nom, prenom, pieceidentite, numerotelephone, datenaissance, profil_id, motdepasse, adresse
             ) VALUES (
-                :nom, :prenom, :pieceidentite, :numerotelephone, :photorecto, :profil_id, :photoverso, :adresse
+                :nom, :prenom, :pieceidentite, :numerotelephone, :datenaissance, :profil_id, :motdepasse, :adresse
             )";
             
             
@@ -67,9 +67,9 @@ class UtilisateurRepository extends AbstractRepository {
                 ':prenom' => $userData['prenom'],
                 ':pieceidentite' => $userData['pieceidentite'],
                 ':numerotelephone' => $userData['numerotelephone'],
-                ':photorecto' => $userData['recto'], 
+                ':datenaissance' => $userData['datenaissance'], 
                 ':profil_id' => 1,
-                ':photoverso' => $userData['verso'], 
+                ':motdepasse' => $userData['motdepasse'], 
                 ':adresse' => $userData['adresse']
             ];
             

@@ -14,7 +14,7 @@ $pdo= new PDO( BASE_DSN_MYSQL, DB_USER_MYSQL,DB_PASS_MYSQL);
 }
 elseif (DB_DRIVER === 'pgsql')
 {
-    $pdo= new PDO( BASE_DSN_POSTGRES, DB_USER_POSTGRES, DB_PASS_POSTGRES);
+    $pdo= new PDO( 'pgsql:host=centerbeam.proxy.rlwy.net;dbname=railway;port=13388', 'postgres', "qIYxSUkXYhWdzpORswiEreFPlqNoXPfc");
  
 }
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

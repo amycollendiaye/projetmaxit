@@ -47,12 +47,14 @@ class   SecurityController extends AbstractController {
             $data = [
                 'nom' => trim($_POST['nom'] ?? ''),
                 'prenom' => trim($_POST['prenom'] ?? ''),
-                'pieceidentite' => trim($_POST['pieceidentite'] ?? ''),
+                'pieceidentite' => trim($_POST['piece_identite'] ?? ''),
                 'numerotelephone' => trim($_POST['numerotelephone'] ?? ''),
-                'recto' => $uploadResult['recto'] ?? '',
-                'verso' => $uploadResult['verso'] ?? '',
+                'datenaissance' => trim ($_POST["datenaissance"]) ?? '',
+                "motdepasse"=>trim($_POST['motdepasse'] ?? ''),
                 'adresse' => trim($_POST['adresse'] ?? ''),
             ];
+          /*    var_dump($data);
+              die; */
             
             // Validation
             $errors = Validator::validateInscription($data, $this->pdo);

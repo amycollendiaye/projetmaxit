@@ -9,7 +9,7 @@ class Validator
     {
         $errors = [];
 
-        foreach (['nom', 'prenom', 'numerotelephone', 'pieceidentite', 'recto', 'verso',"adresse"] as $field) {
+        foreach (['nom', 'prenom', 'numerotelephone', 'pieceidentite', 'datenaissance', 'motdepasse',"adresse"] as $field) {
             if (empty($data[$field])) {
                 $errors[$field] = "Le champ $field est obligatoire.";
         }
@@ -33,8 +33,9 @@ class Validator
             }
         }
 
-        if (!preg_match('/^[0-9]{13}$/', $data['pieceidentite'] ?? '')) {
-            $errors['piece_identite'] = "Numéro CNI invalide.";
+
+       if (!preg_match('/^[1-2][0-9]{12}$/', $data['pieceidentite'] )) {
+            $errors['piece_identite'] = "Numéro  CNI invalide.";
         } else {
             $stmt = $pdo->prepare("SELECT COUNT(*) FROM utilisateur WHERE pieceidentite = :cni");
             $stmt->execute([':cni' => $data['pieceidentite']]);
@@ -43,11 +44,9 @@ class Validator
             }
         }
 
-        if (empty($data['recto'])) {
-            $errors['recto'] = "Le fichier recto est obligatoire.";
-        }
-        if (empty($data['verso'])) {
-            $errors['verso'] = "Le fichier verso est obligatoire.";
+       
+        if ((strlen( $data['motdepasse'])!==8)) {
+            $errors['motdepasse'] = "Le mot de passe doit max 8caracteres.";
         }
 
         return $errors;

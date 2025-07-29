@@ -1,76 +1,59 @@
- export  async  function  fetchCLient(nin)
-  {
-        const r = await  fetch(`https://application-daf.onrender.com/api/v1/citoyens/${nin}`)
+const pieceInput = document.getElementById("pieceidentite");
 
-          if(r.ok===true)
-          {
-              const data=await r.json()
+if (pieceInput) {
+  pieceInput.addEventListener("input", async function (e) {
+    const nin = e.target.value.trim();
+    const cniPattern = /^[1-2][0-9]{12}$/;
+    const successMsg = e.target.parentElement.querySelector(".success-message");
+    const errorMsg = e.target.parentElement.querySelector(".error-message");
+    // Vérifie le format du NIN
+    if (cniPattern.test(nin)) {
+      // console.log(cniPattern.test(nin))
+      successMsg.classList.add("hidden");
+      errorMsg.classList.add("hidden");
 
-             if (data) {
-            alert("NIN trouvé !");
-            console.log(r);
+      // Appel API
+      try {
+        const response = await fetch(`https://application-daf.onrender.com/api/v1/citoyens/${nin}`);
+        const result = await response.json();
+         console.log(result)
+         
+
+        // Si l'API retourne un citoyen
+        if (result.data) {
+          // Remplir les champs
+          document.getElementById("nom").value = result.data.nom || "";
+          document.getElementById("prenom").value = result.data.prenom || "";
+          document.getElementById("datenaissance").value = result.data.date_naissance || "";
+          document.getElementById("adresse").value = result.data.lieu_naissance || "";
+
+          successMsg.textContent = "NIN trouvé, informations récupérées.";
+          successMsg.classList.remove("hidden");
+          errorMsg.classList.add("hidden");
         } else {
-            alert("NIN non trouvé !");
+          errorMsg.textContent = "NIN non trouvé dans la base.";
+          errorMsg.classList.remove("hidden");
+          successMsg.classList.add("hidden");
+          // Vider les champs
+          document.getElementById("nom").value = "";
+          document.getElementById("prenom").value = "";
+          document.getElementById("datenaissance").value = "";
+          document.getElementById("adresse").value = "";
         }
+      } catch (err) {
+        errorMsg.textContent = "Erreur de connexion à l'API.";
+        errorMsg.classList.remove("hidden");
+        successMsg.classList.add("hidden");
+      }
     } else {
-        alert("Impossible de contacter le serveur");
+      errorMsg.textContent = "Format NIN invalide (13 chiffres, commence par 1 ou 2)";
+      errorMsg.classList.remove("hidden");
+      successMsg.classList.add("hidden");
+      // Vider les champs
+      document.getElementById("nom").value = "";
+      document.getElementById("prenom").value = "";
+      document.getElementById("datenaissance").value = "";
+      document.getElementById("adresse").value = "";
     }
-          }
-
-        
-  
-  export function sendResquest()
-  {
-
-    
- const input= document.getElementById('nin')
-    console.log(input)
-      input.addEventListener('input',(e)=>{
-        e .preventDefault()
-         const value =  input.value.trim()
-        console.log(value);
-          if(value.length===13)
-          {
-             (fetchCLient(value))
-          }
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-
-      })
-  }
+  });
+}
